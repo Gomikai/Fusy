@@ -1,27 +1,14 @@
-// --- CONFIGURATION ---
-// Initial data
-const initialData = [
-    {
-        src: 'photo1.png',
-        description: 'A breathtaking view of a mountain range at sunset, capturing the golden hour illumination on the peaks. The clouds reflect the fiery orange hues, creating a dramatic and serene landscape.'
-    },
-    {
-        src: 'photo2.png',
-        description: 'A delicate macro shot of a blue flower, showcasing nature\'s intricate details. Tiny dew drops cling to the petals, reflecting the ambient light and adding texture to the composition.'
-    },
-    {
-        src: 'photo3.png',
-        description: 'A vibrant cityscape at night, illustrating the hustle and bustle of urban life. Long exposure techniques turn moving traffic into flowing rivers of light against the backdrop of illuminated skyscrapers.'
-    },
-    {
-        src: 'https://photos.app.goo.gl/LrtNVkPxJSEP5TP28',
-        description: 'A shared photo from Google Photos.'
-    }
-];
-// ---------------------
+let galleryData = typeof items !== 'undefined' ? items : [];
 
-// Initialize galleryData from localStorage or fallback to initialData
-let galleryData = JSON.parse(localStorage.getItem('fusyGalleryData')) || initialData;
+// Check if localStorage overrides
+const saved = localStorage.getItem('fusyGalleryData');
+if (saved) {
+    try {
+        galleryData = JSON.parse(saved);
+    } catch (e) {
+        console.error("Failed to parse saved gallery data");
+    }
+}
 
 const galleryGrid = document.getElementById('gallery-grid');
 const imageModal = document.getElementById('image-modal');
