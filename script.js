@@ -126,7 +126,7 @@ function openImageModal(index) {
         modalImg.src = `images/${item.src}`;
     }
 
-    modalDesc.innerText = item.description;
+    modalDesc.innerHTML = marked.parse(item.description);
     document.body.style.overflow = 'hidden';
 }
 
