@@ -1,36 +1,54 @@
-// --- CONFIGURATION ---
-// Initial data
-const initialData = [
-    {
-        src: 'photo1.png',
-        description: 'A breathtaking view of a mountain range at sunset, capturing the golden hour illumination on the peaks. The clouds reflect the fiery orange hues, creating a dramatic and serene landscape.'
-    },
-    {
-        src: 'photo2.png',
-        description: 'A delicate macro shot of a blue flower, showcasing nature\'s intricate details. Tiny dew drops cling to the petals, reflecting the ambient light and adding texture to the composition.'
-    },
-    {
-        src: 'photo3.png',
-        description: 'A vibrant cityscape at night, illustrating the hustle and bustle of urban life. Long exposure techniques turn moving traffic into flowing rivers of light against the backdrop of illuminated skyscrapers.'
-    },
-    {
-        src: 'https://photos.app.goo.gl/LrtNVkPxJSEP5TP28',
-        description: 'A shared photo from Google Photos.'
-    }
-];
-// ---------------------
+// Initialize galleryData
+let galleryData = [];
 
-// Initialize galleryData from localStorage or fallback to initialData
-let galleryData = JSON.parse(localStorage.getItem('fusyGalleryData')) || initialData;
+async function fetchGalleryItems() {
+    try {
+        const response = await fetch('items/index.json');
+        const files = await response.json();
+
+        galleryData = []; // Clear current
+
+        for (const file of files) {
+            const res = await fetch(`items/${file}`);
+            const text = await res.text();
+            const parsed = parseMarkdown(text);
+            if (parsed) {
+                galleryData.push(parsed);
+            }
+        }
+        initGallery();
+    } catch (e) {
+        console.error("Failed to load items", e);
+    }
+}
+
+function parseMarkdown(text) {
+    // Simple parser for frontmatter
+    // Normalize newlines
+    text = text.replace(/\r\n/g, '\n');
+
+    const parts = text.split('---');
+    if (parts.length >= 3) {
+        const frontmatter = parts[1];
+        const content = parts.slice(2).join('---').trim();
+
+        let src = '';
+        const lines = frontmatter.split('\n');
+        for (const line of lines) {
+            if (line.trim().startsWith('src:')) {
+                src = line.trim().substring(4).trim();
+            }
+        }
+
+        return { src, description: content };
+    }
+    return null;
+}
 
 const galleryGrid = document.getElementById('gallery-grid');
 const imageModal = document.getElementById('image-modal');
-const addModal = document.getElementById('add-modal');
 const modalImg = document.getElementById('modal-image');
 const modalDesc = document.getElementById('modal-desc');
-
-const addItemBtn = document.getElementById('add-item-btn');
-const addItemForm = document.getElementById('add-item-form');
 
 
 
@@ -149,60 +167,15 @@ function closeImageModal() {
 }
 
 // Add Item Modal
-addItemBtn.onclick = function () {
-    openAddModal(); // Default is Add mode
-}
 
 
-
-function openAddModal() {
-    addModal.style.display = "block";
-    document.body.style.overflow = 'hidden';
-
-    // Reset Form first
-    addItemForm.reset();
-}
-
-function closeAddModal() {
-    addModal.style.display = "none";
-    document.body.style.overflow = 'auto';
-}
-
-// Handle Form Submission
-addItemForm.onsubmit = function (e) {
-    e.preventDefault();
-
-    const filename = document.getElementById('img-filename').value;
-    const description = document.getElementById('img-desc').value;
-
-    // Add new
-    const newItem = {
-        src: filename,
-        description: description
-    };
-    galleryData.push(newItem);
-
-    // Save to LocalStorage
-    localStorage.setItem('fusyGalleryData', JSON.stringify(galleryData));
-
-    // Refresh Gallery
-    initGallery();
-
-    // Close modal
-    closeAddModal();
-
-
-}
-
+// Close modals if clicking outside
 // Close modals if clicking outside
 window.onclick = function (event) {
     if (event.target == imageModal) {
         closeImageModal();
     }
-    if (event.target == addModal) {
-        closeAddModal();
-    }
 }
 
 // Start
-document.addEventListener('DOMContentLoaded', initGallery);
+document.addEventListener('DOMContentLoaded', fetchGalleryItems);
