@@ -85,7 +85,12 @@ async function resolveGooglePhotoUrl(url) {
         const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}&filter=image.url`);
         const data = await response.json();
         if (data.status === 'success' && data.data.image && data.data.image.url) {
-            const resolved = data.data.image.url;
+            let resolved = data.data.image.url;
+            // Remove sizing params and request high-res
+            // Google Photos URLs often end with params like =w600-h315-p-k
+            // We replace them to get the full image
+            resolved = resolved.replace(/=[^=]*$/, '=w2400');
+
             resolvedUrlCache.set(url, resolved);
             return resolved;
         }
