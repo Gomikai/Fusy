@@ -13,7 +13,7 @@
     <header>
         <h1>Fusy</h1>
         <p>Not Resy</p>
-        <button id="add-item-btn" class="add-btn" title="Add New Recipe">+</button>
+
     </header>
 
     <main>
@@ -32,23 +32,7 @@
         </div>
     </div>
 
-    <!-- Modal for Adding New Item -->
-    <div id="add-modal" class="modal">
-        <span class="close" onclick="closeAddModal()">&times;</span>
-        <div class="modal-content input-modal">
-            <h2>Add New Recipe</h2>
-            <form id="add-item-form">
-                <label for="img-filename">Image Filename (e.g., photo4.png):</label>
-                <input type="text" id="img-filename" name="filename" required placeholder="photo.jpg">
 
-                <label for="img-desc">Recipe Notes:</label>
-                <textarea id="img-desc" name="description" rows="10" required
-                    placeholder="Enter your recipe notes here..."></textarea>
-
-                <button type="submit" class="submit-btn">Add to Gallery</button>
-            </form>
-        </div>
-    </div>
 
     <footer>
         <p>&copy; 2026 My Website. Hosted on GitHub.</p>

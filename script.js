@@ -25,12 +25,8 @@ let galleryData = JSON.parse(localStorage.getItem('fusyGalleryData')) || initial
 
 const galleryGrid = document.getElementById('gallery-grid');
 const imageModal = document.getElementById('image-modal');
-const addModal = document.getElementById('add-modal');
 const modalImg = document.getElementById('modal-image');
 const modalDesc = document.getElementById('modal-desc');
-
-const addItemBtn = document.getElementById('add-item-btn');
-const addItemForm = document.getElementById('add-item-form');
 
 
 
@@ -149,58 +145,13 @@ function closeImageModal() {
 }
 
 // Add Item Modal
-addItemBtn.onclick = function () {
-    openAddModal(); // Default is Add mode
-}
 
 
-
-function openAddModal() {
-    addModal.style.display = "block";
-    document.body.style.overflow = 'hidden';
-
-    // Reset Form first
-    addItemForm.reset();
-}
-
-function closeAddModal() {
-    addModal.style.display = "none";
-    document.body.style.overflow = 'auto';
-}
-
-// Handle Form Submission
-addItemForm.onsubmit = function (e) {
-    e.preventDefault();
-
-    const filename = document.getElementById('img-filename').value;
-    const description = document.getElementById('img-desc').value;
-
-    // Add new
-    const newItem = {
-        src: filename,
-        description: description
-    };
-    galleryData.push(newItem);
-
-    // Save to LocalStorage
-    localStorage.setItem('fusyGalleryData', JSON.stringify(galleryData));
-
-    // Refresh Gallery
-    initGallery();
-
-    // Close modal
-    closeAddModal();
-
-
-}
-
+// Close modals if clicking outside
 // Close modals if clicking outside
 window.onclick = function (event) {
     if (event.target == imageModal) {
         closeImageModal();
-    }
-    if (event.target == addModal) {
-        closeAddModal();
     }
 }
 

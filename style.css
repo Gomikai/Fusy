@@ -20,30 +20,7 @@ header {
     gap: 1rem;
 }
 
-.add-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    font-size: 32px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s, background-color 0.3s;
-}
 
-.add-btn:hover {
-    background-color: #ff5252;
-    transform: scale(1.1);
-}
 
 /* Gallery Grid */
 .gallery-grid {
@@ -103,50 +80,7 @@ header {
     animation: zoomIn 0.3s ease;
 }
 
-.input-modal {
-    padding: 2rem;
-    max-width: 600px;
-    text-align: left;
-}
 
-.input-modal h2 {
-    margin-top: 0;
-    color: #333;
-}
-
-.input-modal label {
-    display: block;
-    margin: 15px 0 5px;
-    font-weight: bold;
-}
-
-.input-modal input,
-.input-modal textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit;
-    box-sizing: border-box;
-}
-
-.submit-btn {
-    margin-top: 20px;
-    width: 100%;
-    background-color: #333;
-    position: static;
-    transform: none;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background-color: #555;
-}
 
 @keyframes zoomIn {
     from {
@@ -239,22 +173,7 @@ header {
 }
 
 /* Specific close button color for input modal (white background) */
-#add-modal .close {
-    color: #333;
-    top: 10px;
-    right: 20px;
-}
 
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#add-modal .close:hover {
-    color: #000;
-}
 
 /* Footer */
 footer {
@@ -276,11 +195,5 @@ footer {
         justify-content: center;
     }
 
-    .input-modal {
-        height: auto;
-        min-height: 100%;
-        justify-content: flex-start;
-        padding-top: 4rem;
-        /* Space for close button */
-    }
+
 }
