@@ -14,6 +14,35 @@ header {
     color: white;
     padding: 2rem 0;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.add-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #ff5252;
+    transform: scale(1.1);
 }
 
 /* Gallery Grid */
@@ -74,6 +103,51 @@ header {
     animation: zoomIn 0.3s ease;
 }
 
+.input-modal {
+    padding: 2rem;
+    max-width: 600px;
+    text-align: left;
+}
+
+.input-modal h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.input-modal label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+}
+
+.input-modal input,
+.input-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #333;
+    position: static;
+    transform: none;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #555;
+}
+
 @keyframes zoomIn {
     from {
         transform: scale(0.8);
@@ -86,22 +160,69 @@ header {
     }
 }
 
+#image-modal .modal-content {
+    height: 85vh;
+    /* Fixed height to allow layout shifting */
+    display: flex;
+    flex-direction: column;
+}
+
 #modal-image {
     width: 100%;
-    height: auto;
-    max-height: 70vh;
+    /* Default: Focus on image */
+    flex: 3;
+    min-height: 0;
+    /* Crucial for flex item scrolling/shrinking behavior */
     object-fit: contain;
     background: #000;
     display: block;
+    cursor: default;
+    /* Changed via JS or context */
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .modal-caption {
     padding: 20px;
+    padding-bottom: 5rem;
+    /* Space for the edit button */
     text-align: left;
+    white-space: pre-wrap;
+    /* Preserves newlines in text */
     font-size: 1.1rem;
     line-height: 1.6;
     color: #444;
+    position: relative;
+    background: #fff;
+
+    /* Default: Text takes remaining space */
+    flex: 1;
+    overflow-y: auto;
+    cursor: pointer;
+    /* Indication it can be clicked */
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+.modal-caption:hover {
+    background-color: #f9f9f9;
+}
+
+/* Text Focus Layout - Triggered by class 'text-focus' on modal-content */
+.modal-content.text-focus #modal-image {
+    flex: 0 0 25vh;
+    /* Shrink image to a strip */
+    object-fit: cover;
+    /* Crop image to fill the strip nicely */
+    cursor: pointer;
+}
+
+.modal-content.text-focus .modal-caption {
+    flex: 1;
+    /* Grow to fill the rest */
+    cursor: default;
+    background-color: #fff;
+}
+
+
 
 /* Close Button */
 .close {
@@ -109,6 +230,7 @@ header {
     top: 15px;
     right: 35px;
     color: #f1f1f1;
+    /* Default for image modal (dark background) */
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
@@ -116,11 +238,22 @@ header {
     cursor: pointer;
 }
 
+/* Specific close button color for input modal (white background) */
+#add-modal .close {
+    color: #333;
+    top: 10px;
+    right: 20px;
+}
+
 .close:hover,
 .close:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+#add-modal .close:hover {
+    color: #000;
 }
 
 /* Footer */
@@ -141,5 +274,13 @@ footer {
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .input-modal {
+        height: auto;
+        min-height: 100%;
+        justify-content: flex-start;
+        padding-top: 4rem;
+        /* Space for close button */
     }
 }
