@@ -1,7 +1,7 @@
 const items = [
     {
-        src: 'photo1.png',
-        description: 'A breathtaking view of a mountain range at sunset, capturing the golden hour illumination on the peaks. The clouds reflect the fiery orange hues, creating a dramatic and serene landscape.'
+        src: 'https://photos.app.goo.gl/dqUYb7raoctpj8186',
+        description: '干锅花菜\n- 茅头测试'
     },
     {
         src: 'photo2.png',
@@ -13,6 +13,6 @@ const items = [
     },
     {
         src: 'https://photos.app.goo.gl/LrtNVkPxJSEP5TP28',
-        description: 'A shared photo from Google Photos.'
+        description: 'A Mauham.'
     }
 ];
