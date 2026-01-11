@@ -10,14 +10,17 @@ body {
 
 /* Header Styling */
 header {
-    background-color: #333;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/header-bg.png');
+    background-size: cover;
+    background-position: center;
     color: white;
-    padding: 2rem 0;
+    padding: 3rem 0;
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
