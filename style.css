@@ -123,8 +123,7 @@ header {
     padding-bottom: 5rem;
     /* Space for the edit button */
     text-align: left;
-    white-space: pre-wrap;
-    /* Preserves newlines in text */
+    /* white-space: pre-wrap; Removed to prevent extra spacing with markdown */
     font-size: 1.1rem;
     line-height: 1.6;
     color: #444;
@@ -137,6 +136,37 @@ header {
     cursor: pointer;
     /* Indication it can be clicked */
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.modal-caption h1,
+.modal-caption h2,
+.modal-caption h3,
+.modal-caption h4,
+.modal-caption h5,
+.modal-caption h6 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.modal-caption p {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+}
+
+.modal-caption ul,
+.modal-caption ol {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+}
+
+.modal-caption li {
+    margin-bottom: 0.2rem;
+}
+
+.modal-caption *:first-child {
+    margin-top: 0;
 }
 
 .modal-caption:hover {
