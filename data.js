@@ -34,6 +34,9 @@ const items = [
     },
     {
         src: 'https://photos.app.goo.gl/LrtNVkPxJSEP5TP28',
-        description: `## 茅腿`
+        description: `## 茅腿
+- 领养一只tabby cat，每天喂2个罐头，另外20克干猫粮，时不时给个蛋黄，偶尔也可以
+- 给点人类食物，比如西红柿炒鸡蛋的汤，或者剩菜的三文鱼渣
+- 等到某一天，茅的大腿周长有10cm粗，茅腿就做成了`
     }
 ];
